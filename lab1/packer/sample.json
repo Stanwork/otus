@@ -1,0 +1,105 @@
+#Основная секция, в ней указываются характеристики нашей ВМ
+{"builders": [
+    {
+      #Указываем ссылку на файл автоматической конфигурации 
+      "boot_command": [
+        "<tab> inst.text inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>"
+      ],
+      "boot_wait": "10s",
+      #Указываем размер диска для ВМ
+      "disk_size": "10240",
+      "export_opts": [
+        "--manifest",
+        "--vsys",
+        "0",
+        "--description",
+        "{{user `artifact_description`}}",
+        "--version",
+        "{{user `artifact_version`}}"
+      ],
+      #Указываем семейство ОС нашей ВМ
+      "guest_os_type": "RedHat_64",
+      #Указываем каталог, из которого возьмём файл автоматической конфигурации
+      "http_directory": "http",
+      #Контрольная сумма ISO-файла
+      #Проверяется после скачивания файла
+      "iso_checksum": "0f433162c0ba7b845b06a9cb3c64768b88da1ddf9fb921b65de2a055fb7453f7",
+      #Ссылка на дистрибутив из которого будет разворачиваться наша ВМ
+      "iso_url": "http://mirror.linux-ia64.org/centos/8-stream/isos/x86_64/CentOS-Stream-8-x86_64-20220603-boot.iso",
+      #Hostname нашей ВМ
+      #Имя ВМ будет взято из переменной image_name
+      "name": "{{user `image_name`}}",
+      "output_directory": "builds",
+      "shutdown_command": "sudo -S /sbin/halt -h -p",
+      "shutdown_timeout": "5m",
+      #Пароль пользователя
+      "ssh_password": "vagrant",
+      #Номер ssh-порта
+      "ssh_port": 22,
+      "ssh_pty": true,
+      #Тайм-аут подключения по SSH
+      #Если через 20 минут не получается подключиться, то сборка отменяется
+      "ssh_timeout": "20m",
+      #Имя пользователя
+      "ssh_username": "vagrant",
+      #Тип созданного образа (Для VirtualBox)
+      "type": "virtualbox-iso",
+      #Параметры ВМ
+      #2 CPU и 1Гб ОЗУ
+      "vboxmanage": [
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--memory",
+          "1024"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--cpus",
+          "2"
+        ]
+      ],
+      #Имя ВМ в VirtualBox
+      "vm_name": "packer-centos-vm"
+    }
+  ],
+  "post-processors": [
+    {
+      #Уровень сжатия
+      "compression_level": "7",
+      #Указание пути для сохранения образа
+      #Будет сохранён в каталог packer
+      "output": "centos-{{user `artifact_version`}}-kernel-5-x86_64-Minimal.box",
+      "type": "vagrant"
+    }
+  ],
+  #Настройка ВМ после установки
+  "provisioners": [
+    {
+      "execute_command": "{{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "expect_disconnect": true,
+      "override": {
+        "{{user `image_name`}}": {
+          #Скрипты, которые будут запущены после установки ОС
+          #Скрипты выполняются в указанном порядке
+          "scripts": [
+            "scripts/stage-1-kernel-update.sh",
+            "scripts/stage-2-clean.sh"
+          ]
+        }
+      },
+      #Тайм-аут запуска скриптов, после того, как подключились по SSH
+      "pause_before": "20s",
+      "start_retry_timeout": "1m",
+      "type": "shell"
+    }
+  ],
+  #Указываем переменные
+  #К переменным можно обращаться внутри данного JSON-файла
+  "variables": {
+    "artifact_description": "CentOS Stream 8 with kernel 5.x",
+    "artifact_version": "8",
+    "image_name": "centos-8"
+  }
+}

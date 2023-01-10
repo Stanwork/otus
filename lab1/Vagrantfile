@@ -1,0 +1,33 @@
+MACHINES = {
+  # Set hostname:
+  :"centos8" => {
+              #Какой vm box будем использовать
+              :box_name => "centos/stream8",
+              #Указываем box_version
+              :box_version => "20210210.0",
+              #Указываем количество ядер ВМ
+              :cpus => 2,
+              #Указываем количество ОЗУ в мегабайтах
+              :memory => 1048,
+              :disksize => '50GB',
+            }
+}
+
+Vagrant.configure("2") do |config|
+  config.disksize.size = '50GB'
+  MACHINES.each do |boxname, boxconfig|
+    # Отключаем проброс общей папки в ВМ
+    config.vm.synced_folder ".", "/vagrant", disabled: true
+    # Apply config for box{n}
+    config.vm.define boxname do |box1|
+      box1.vm.box = boxconfig[:box_name]
+      box1.vm.box_version = boxconfig[:box_version]
+      box1.vm.host_name = boxname.to_s
+      box1.vm.provider "virtualbox" do |v|
+        v.memory = boxconfig[:memory]
+        v.cpus = boxconfig[:cpus]
+#        v.disksize.size = boxconfig[:disksize]
+      end
+    end
+  end
+end
