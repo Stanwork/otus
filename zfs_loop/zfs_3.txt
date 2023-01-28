@@ -1,0 +1,39 @@
+Script started on 2023-01-28 23:39:01+03:00 [TERM="xterm-256color" TTY="/dev/pts/1" COLUMNS="112" LINES="39"]
+[?2004h]0;stas@matebook: ~/Code/otus_labs/zfs_loop[01;32mstas@matebook[00m:[01;34m~/Code/otus_labs/zfs_loop[00m$ exitvagrant ssh
+[?2004lLast login: Sat Jan 28 20:32:25 2023 from 10.0.2.2
+]0;vagrant@vmzfs:~[?2004h[vagrant@vmzfs ~]$ exitsudo -i[3Pexitsudo -i
+[?2004l]0;root@vmzfs:~[?2004h[root@vmzfs ~]# [7mwget -O otus_task2.file --no-check-certificate 'https://drive.google.com/u/0/uc?id=1gH8gCL9y7Nd5[27m[7mT[27m[7mi3IRmplZPF1XjzxeRAG&export=download'[27m[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cwget -O otus_task2.file --no-check-certificate 'https://drive.google.com/u/0/uc?id=1gH8gCL9y7Nd5Ti3IRmplZPF1XjzxeRAG&export=download'
+[?2004l--2023-01-28 20:39:12--  https://drive.google.com/u/0/uc?id=1gH8gCL9y7Nd5Ti3IRmplZPF1XjzxeRAG&export=download
+Resolving drive.google.com (drive.google.com)... 142.250.147.194, 2a00:1450:4025:c01::c2
+Connecting to drive.google.com (drive.google.com)|142.250.147.194|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://drive.google.com/uc?id=1gH8gCL9y7Nd5Ti3IRmplZPF1XjzxeRAG&export=download [following]
+--2023-01-28 20:39:13--  https://drive.google.com/uc?id=1gH8gCL9y7Nd5Ti3IRmplZPF1XjzxeRAG&export=download
+Reusing existing connection to drive.google.com:443.
+HTTP request sent, awaiting response... 303 See Other
+Location: https://doc-00-bo-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/3nhi6r8tdqm93gd33bmt88abr57f3m1i/1674938325000/16189157874053420687/*/1gH8gCL9y7Nd5Ti3IRmplZPF1XjzxeRAG?e=download&uuid=710e09d8-c4a2-4241-96c7-f7d671414009 [following]
+Warning: wildcards not supported in HTTP.
+--2023-01-28 20:39:13--  https://doc-00-bo-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/3nhi6r8tdqm93gd33bmt88abr57f3m1i/1674938325000/16189157874053420687/*/1gH8gCL9y7Nd5Ti3IRmplZPF1XjzxeRAG?e=download&uuid=710e09d8-c4a2-4241-96c7-f7d671414009
+Resolving doc-00-bo-docs.googleusercontent.com (doc-00-bo-docs.googleusercontent.com)... 142.250.186.97, 2a00:1450:4001:803::2001
+Connecting to doc-00-bo-docs.googleusercontent.com (doc-00-bo-docs.googleusercontent.com)|142.250.186.97|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 5432736 (5.2M) [application/octet-stream]
+Saving to: ‘otus_task2.file’
+
+otus_task2.file               0%[                                            ]       0  --.-KB/s               otus_task2.file               2%[>                                           ] 143.99K   707KB/s               otus_task2.file              23%[=========>                                  ]   1.22M  2.97MB/s               otus_task2.file              34%[==============>                             ]   1.78M  2.91MB/s               otus_task2.file              72%[===============================>            ]   3.77M  4.61MB/s               otus_task2.file             100%[===========================================>]   5.18M  5.17MB/s    in 1.0s    
+
+2023-01-28 20:39:15 (5.17 MB/s) - ‘otus_task2.file’ saved [5432736/5432736]
+
+]0;root@vmzfs:~[?2004h[root@vmzfs ~]# zfs receive otus_task2.file [K[K[K[K[K[K[K[K[K[K[K[K/test@todat[Ky < otus_task2.file [K
+[?2004l]0;root@vmzfs:~[?2004h[root@vmzfs ~]# find /u[Ki[Kotus/test/[K -name ""s"e"c"r"e"t"_"m"e"s"s"a"g"e"
+[?2004l/otus/test/task1/file_mess/secret_message
+]0;root@vmzfs:~[?2004h[root@vmzfs ~]# cat [7m/otus/test/task1/file_mess/secret_message[27m[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C/otus/test/task1/file_mess/secret_message
+[?2004lhttps://github.com/sindresorhus/awesome
+]0;root@vmzfs:~[?2004h[root@vmzfs ~]# exit
+[?2004llogout
+]0;vagrant@vmzfs:~[?2004h[vagrant@vmzfs ~]$ exit
+[?2004llogout
+[?2004h]0;stas@matebook: ~/Code/otus_labs/zfs_loop[01;32mstas@matebook[00m:[01;34m~/Code/otus_labs/zfs_loop[00m$ exit
+[?2004lexit
+
+Script done on 2023-01-28 23:47:48+03:00 [COMMAND_EXIT_CODE="0"]

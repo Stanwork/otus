@@ -1,0 +1,192 @@
+Script started on 2023-01-28 23:13:55+03:00 [TERM="xterm-256color" TTY="/dev/pts/1" COLUMNS="112" LINES="39"]
+[?2004h]0;stas@matebook: ~/Code/otus_labs/zfs_loop[01;32mstas@matebook[00m:[01;34m~/Code/otus_labs/zfs_loop[00m$ exitvagrant ssh[7Pexitvagrant ssh
+[?2004l]0;vagrant@vmzfs:~[?2004h[vagrant@vmzfs ~]$ sudo -i
+[?2004l]0;root@vmzfs:~[?2004h[root@vmzfs ~]# lsblk
+[?2004lNAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
+sda      8:0    0 19.5G  0 disk 
+├─sda1   8:1    0    1M  0 part 
+└─sda2   8:2    0 19.5G  0 part /
+sdb      8:16   0  512M  0 disk 
+sdc      8:32   0  512M  0 disk 
+sdd      8:48   0  512M  0 disk 
+sde      8:64   0  512M  0 disk 
+sdf      8:80   0  512M  0 disk 
+sdg      8:96   0  512M  0 disk 
+sdh      8:112  0  512M  0 disk 
+sdi      8:128  0  512M  0 disk 
+]0;root@vmzfs:~[?2004h[root@vmzfs ~]# zpool create otus1 mirror d[K/dev/sdb /dev/sdc
+[?2004l]0;root@vmzfs:~[?2004h[root@vmzfs ~]# zpool create otus1 mirror /dev/sdb /dev/sdc[1P[1@2[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P /dev/sdcd /dev/sdc[C[C[C[C[C[C[C[C[C[Kr[Ke
+[?2004l]0;root@vmzfs:~[?2004h[root@vmzfs ~]# zpool create otus2 mirror /dev/sdd /dev/sde[1P[1@3[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P /dev/sdef /dev/sde[C[C[C[C[C[C[C[C[C[Kg
+[?2004l]0;root@vmzfs:~[?2004h[root@vmzfs ~]# zpool create otus3 mirror /dev/sdf /dev/sdg[1P[1@4[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P /dev/sdgg /dev/sdg[1P /dev/sdgh /dev/sdg[C[C[C[C[C[C[C[C[C[Ki
+[?2004l]0;root@vmzfs:~[?2004h[root@vmzfs ~]# zpool list
+[?2004lNAME    SIZE  ALLOC   FREE  CKPOINT  EXPANDSZ   FRAG    CAP  DEDUP    HEALTH  ALTROOT
+otus1   480M    99K   480M        -         -     0%     0%  1.00x    ONLINE  -
+otus2   480M   100K   480M        -         -     0%     0%  1.00x    ONLINE  -
+otus3   480M   528K   479M        -         -     0%     0%  1.00x    ONLINE  -
+otus4   480M   528K   479M        -         -     0%     0%  1.00x    ONLINE  -
+]0;root@vmzfs:~[?2004h[root@vmzfs ~]# zpool status
+[?2004l  pool: otus1
+ state: ONLINE
+config:
+
+	NAME        STATE     READ WRITE CKSUM
+	otus1       ONLINE       0     0     0
+	  mirror-0  ONLINE       0     0     0
+	    sdb     ONLINE       0     0     0
+	    sdc     ONLINE       0     0     0
+
+errors: No known data errors
+
+  pool: otus2
+ state: ONLINE
+config:
+
+	NAME        STATE     READ WRITE CKSUM
+	otus2       ONLINE       0     0     0
+	  mirror-0  ONLINE       0     0     0
+	    sdd     ONLINE       0     0     0
+	    sde     ONLINE       0     0     0
+
+errors: No known data errors
+
+  pool: otus3
+ state: ONLINE
+config:
+
+	NAME        STATE     READ WRITE CKSUM
+	otus3       ONLINE       0     0     0
+	  mirror-0  ONLINE       0     0     0
+	    sdf     ONLINE       0     0     0
+	    sdg     ONLINE       0     0     0
+
+errors: No known data errors
+
+  pool: otus4
+ state: ONLINE
+config:
+
+	NAME        STATE     READ WRITE CKSUM
+	otus4       ONLINE       0     0     0
+	  mirror-0  ONLINE       0     0     0
+	    sdh     ONLINE       0     0     0
+	    sdi     ONLINE       0     0     0
+
+errors: No known data errors
+]0;root@vmzfs:~[?2004h[root@vmzfs ~]# zfs set compression=lzjv[Kb otus1
+[?2004l]0;root@vmzfs:~[?2004h[root@vmzfs ~]# zfs set compression=lzjb otus1[C[C[C[C[C[K2[1P otus2[1P otus24 otus2
+[?2004l]0;root@vmzfs:~[?2004h[root@vmzfs ~]# zfs set compression=lz4 otus2[K3[C[C[1P otus3[1P otus3[1P otus3g otus3z otus3i otus3p otus3- otus39 otus3
+[?2004l]0;root@vmzfs:~[?2004h[root@vmzfs ~]# zfs set compression=gzip-9 otus3[K4[C[C[C[C[1P otus4[1P otus4[1P otus4[1P otus4[1P otus4[1P otus4z otus4l otus4e otus4
+[?2004l]0;root@vmzfs:~[?2004h[root@vmzfs ~]# zfs get all | grep compression
+[?2004lotus1  [01;31m[Kcompression[m[K           lzjb                   local
+otus2  [01;31m[Kcompression[m[K           lz4                    local
+otus3  [01;31m[Kcompression[m[K           gzip-9                 local
+otus4  [01;31m[Kcompression[m[K           zle                    local
+]0;root@vmzfs:~[?2004h[root@vmzfs ~]# [7mfor i in {1..4}; do wget -P /otus$i[27m
+[7mhttps://gutenberg.org/cache/epub/2600/pg2600.converter.log; done[27m[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cfor i in {1..4}; do wget -P /otus$i
+https://gutenberg.org/cache/epub/2600/pg2600.converter.log; done
+[?2004lwget: missing URL
+Usage: wget [OPTION]... [URL]...
+
+Try `wget --help' for more options.
+-bash: https://gutenberg.org/cache/epub/2600/pg2600.converter.log: No such file or directory
+wget: missing URL
+Usage: wget [OPTION]... [URL]...
+
+Try `wget --help' for more options.
+-bash: https://gutenberg.org/cache/epub/2600/pg2600.converter.log: No such file or directory
+wget: missing URL
+Usage: wget [OPTION]... [URL]...
+
+Try `wget --help' for more options.
+-bash: https://gutenberg.org/cache/epub/2600/pg2600.converter.log: No such file or directory
+wget: missing URL
+Usage: wget [OPTION]... [URL]...
+
+Try `wget --help' for more options.
+-bash: https://gutenberg.org/cache/epub/2600/pg2600.converter.log: No such file or directory
+]0;root@vmzfs:~[?2004h[root@vmzfs ~]# [7mfor i in {1..4}; do wget -P /otus$i https://www.gutenberg.org/cache/epub/2600/pg2600.txt; done[27m[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cfor i in {1..4}; do wget -P /otus$i https://www.gutenberg.org/cache/epub/2600/pg2600.txt; done
+[?2004l--2023-01-28 20:23:02--  https://www.gutenberg.org/cache/epub/2600/pg2600.txt
+Resolving www.gutenberg.org (www.gutenberg.org)... 152.19.134.47, 2610:28:3090:3000:0:bad:cafe:47
+Connecting to www.gutenberg.org (www.gutenberg.org)|152.19.134.47|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 3359372 (3.2M) [text/plain]
+Saving to: ‘/otus1/pg2600.txt’
+
+pg2600.txt                    0%[                                            ]       0  --.-KB/s               pg2600.txt                    1%[                                            ]  49.55K   221KB/s               pg2600.txt                    6%[=>                                          ] 200.16K   423KB/s               pg2600.txt                   14%[=====>                                      ] 485.31K   712KB/s               pg2600.txt                   28%[===========>                                ] 939.19K   943KB/s               pg2600.txt                   80%[==================================>         ]   2.59M  2.16MB/s               pg2600.txt                  100%[===========================================>]   3.20M  2.35MB/s    in 1.4s    
+
+2023-01-28 20:23:04 (2.35 MB/s) - ‘/otus1/pg2600.txt’ saved [3359372/3359372]
+
+--2023-01-28 20:23:04--  https://www.gutenberg.org/cache/epub/2600/pg2600.txt
+Resolving www.gutenberg.org (www.gutenberg.org)... 152.19.134.47, 2610:28:3090:3000:0:bad:cafe:47
+Connecting to www.gutenberg.org (www.gutenberg.org)|152.19.134.47|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 3359372 (3.2M) [text/plain]
+Saving to: ‘/otus2/pg2600.txt’
+
+pg2600.txt                    0%[                                            ]       0  --.-KB/s               pg2600.txt                    1%[                                            ]  65.55K   328KB/s               pg2600.txt                    6%[=>                                          ] 200.16K   407KB/s               pg2600.txt                   15%[=====>                                      ] 506.22K   726KB/s               pg2600.txt                   41%[=================>                          ]   1.31M  1.45MB/s               pg2600.txt                   68%[=============================>              ]   2.21M  1.97MB/s               pg2600.txt                   92%[=======================================>    ]   2.97M  2.24MB/s               pg2600.txt                  100%[===========================================>]   3.20M  2.30MB/s    in 1.4s    
+
+2023-01-28 20:23:07 (2.30 MB/s) - ‘/otus2/pg2600.txt’ saved [3359372/3359372]
+
+--2023-01-28 20:23:07--  https://www.gutenberg.org/cache/epub/2600/pg2600.txt
+Resolving www.gutenberg.org (www.gutenberg.org)... 152.19.134.47, 2610:28:3090:3000:0:bad:cafe:47
+Connecting to www.gutenberg.org (www.gutenberg.org)|152.19.134.47|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 3359372 (3.2M) [text/plain]
+Saving to: ‘/otus3/pg2600.txt’
+
+pg2600.txt                    0%[                                            ]       0  --.-KB/s               pg2600.txt                    1%[                                            ]  65.53K   265KB/s               pg2600.txt                    6%[=>                                          ] 200.14K   416KB/s               pg2600.txt                   15%[=====>                                      ] 504.15K   740KB/s               pg2600.txt                   41%[=================>                          ]   1.32M  1.46MB/s               pg2600.txt                   69%[=============================>              ]   2.22M  1.96MB/s               pg2600.txt                   98%[==========================================> ]   3.16M  2.36MB/s               pg2600.txt                  100%[===========================================>]   3.20M  2.33MB/s    in 1.4s    
+
+2023-01-28 20:23:09 (2.33 MB/s) - ‘/otus3/pg2600.txt’ saved [3359372/3359372]
+
+--2023-01-28 20:23:09--  https://www.gutenberg.org/cache/epub/2600/pg2600.txt
+Resolving www.gutenberg.org (www.gutenberg.org)... 152.19.134.47, 2610:28:3090:3000:0:bad:cafe:47
+Connecting to www.gutenberg.org (www.gutenberg.org)|152.19.134.47|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 3359372 (3.2M) [text/plain]
+Saving to: ‘/otus4/pg2600.txt’
+
+pg2600.txt                    0%[                                            ]       0  --.-KB/s               pg2600.txt                    2%[>                                           ]  78.84K   391KB/s               pg2600.txt                    6%[=>                                          ] 200.16K   408KB/s               pg2600.txt                   15%[=====>                                      ] 504.17K   727KB/s               pg2600.txt                   38%[===============>                            ]   1.22M  1.36MB/s               pg2600.txt                   68%[=============================>              ]   2.19M  1.99MB/s               pg2600.txt                   92%[=======================================>    ]   2.96M  2.23MB/s               pg2600.txt                  100%[===========================================>]   3.20M  2.31MB/s    in 1.4s    
+
+2023-01-28 20:23:11 (2.31 MB/s) - ‘/otus4/pg2600.txt’ saved [3359372/3359372]
+
+]0;root@vmzfs:~[?2004h[root@vmzfs ~]# ls -lsh /otus*[C[1P /otus*[1P /otus*
+[?2004l/otus1:
+total 2443
+-rw-r--r--. 1 root root 3359372 Jan  2 09:18 pg2600.txt
+
+/otus2:
+total 2041
+-rw-r--r--. 1 root root 3359372 Jan  2 09:18 pg2600.txt
+
+/otus3:
+total 1239
+-rw-r--r--. 1 root root 3359372 Jan  2 09:18 pg2600.txt
+
+/otus4:
+total 3287
+-rw-r--r--. 1 root root 3359372 Jan  2 09:18 pg2600.txt
+]0;root@vmzfs:~[?2004h[root@vmzfs ~]# zfs list
+[?2004lNAME    USED  AVAIL     REFER  MOUNTPOINT
+otus1  2.52M   349M     2.41M  /otus1
+otus2  2.12M   350M     2.02M  /otus2
+otus3  1.76M   350M     1.23M  /otus3
+otus4  3.75M   348M     3.23M  /otus4
+]0;root@vmzfs:~[?2004h[root@vmzfs ~]# zfs listls -l /otus*for i in {1..4}; do wget -P /otus$i https://www.gutenberg.org/cache/epub/2600/pg2600.txt; done[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C; https://gutenberg.org/cache/epub/2600/pg2600.converter.log; done[A[C[C[C[C[C[C[C[C[C[C[Czfs get all | grep compression[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C | grep -v ref
+[?2004lotus1  compression           lzjb                   local
+otus2  compression           lz4                    local
+otus3  compression           gzip-9                 local
+otus4  compression           zle                    local
+]0;root@vmzfs:~[?2004h[root@vmzfs ~]# zfs get all | grep compression | grep -v ref[1P[1P[1P[1@r[1@a[1@t[1@i[1@o
+[?2004lotus1  compressratio         1.35x                  -
+otus2  compressratio         1.61x                  -
+otus3  compressratio         2.46x                  -
+otus4  compressratio         1.01x                  -
+]0;root@vmzfs:~[?2004h[root@vmzfs ~]# exit
+[?2004llogout
+]0;vagrant@vmzfs:~[?2004h[vagrant@vmzfs ~]$ exit
+[?2004llogout
+[?2004h]0;stas@matebook: ~/Code/otus_labs/zfs_loop[01;32mstas@matebook[00m:[01;34m~/Code/otus_labs/zfs_loop[00m$ exit
+[?2004lexit
+
+Script done on 2023-01-28 23:25:43+03:00 [COMMAND_EXIT_CODE="0"]
