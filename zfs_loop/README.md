@@ -11,7 +11,7 @@
 * установка и настройка ZFS ( setup_zfs.sh )
 
 * Запуск сборки: VAGRANT_EXPERIMENTAL=disks vagrant up
-
+- лог сборки: [vagrant_up.txt](https://github.com/Stanwork/otus_labs/blob/main/zfs_loop/vagrant_up.txt)
 
 1. Определение алгоритма с наилучшим сжатием
 
@@ -23,7 +23,7 @@ otus3            compressratio         2.46x                  -
 otus4            compressratio         1.01x                  -
 ```
 
-  * лог с помощью script записан в zfs_1.txt
+  * лог с помощью script записан в [zfs_1.txt](https://github.com/Stanwork/otus_labs/blob/main/zfs_loop/zfs_1.txt)
 2. Определение настроек пула
 ```
 [root@vmzfs ~]# zfs get available otus
@@ -42,10 +42,10 @@ otus  compression  zle             local
 NAME  PROPERTY  VALUE      SOURCE
 otus  checksum  sha256     local
 ```
-  * лог с помощью script записан в zfs_2.txt
+  * лог с помощью script записан в [zfs_2.txt](https://github.com/Stanwork/otus_labs/blob/main/zfs_loop/zfs_2.txt)
 3. Работа со снапшотом, поиск сообщения от преподавателя
 ```
 [root@vmzfs ~]# cat /otus/test/task1/file_mess/secret_message
 https://github.com/sindresorhus/awesome
 ```
-  * лог с помощью script записан в zfs_3.txt
+  * лог с помощью script записан в [zfs_3.txt](https://github.com/Stanwork/otus_labs/blob/main/zfs_loop/zfs_3.txt)
