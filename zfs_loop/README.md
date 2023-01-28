@@ -14,16 +14,18 @@
 
 
 1. Определение алгоритма с наилучшим сжатием
-'''
+
+```
 [root@vmzfs ~]# zfs get all | grep compressratio | grep -v ref
 otus1            compressratio         1.35x                  -
 otus2            compressratio         1.61x                  -
 otus3            compressratio         2.46x                  -
 otus4            compressratio         1.01x                  -
-'''
+```
+
   * лог с помощью script записан в zfs_1.txt
 2. Определение настроек пула
-'''
+```
 [root@vmzfs ~]# zfs get available otus
 NAME  PROPERTY   VALUE  SOURCE
 otus  available  347M   -
@@ -39,11 +41,11 @@ otus  compression  zle             local
 [root@vmzfs ~]# zfs get checksum otus
 NAME  PROPERTY  VALUE      SOURCE
 otus  checksum  sha256     local
-'''
+```
   * лог с помощью script записан в zfs_2.txt
 3. Работа со снапшотом, поиск сообщения от преподавателя
-'''
+```
 [root@vmzfs ~]# cat /otus/test/task1/file_mess/secret_message
 https://github.com/sindresorhus/awesome
-'''
+```
   * лог с помощью script записан в zfs_3.txt
