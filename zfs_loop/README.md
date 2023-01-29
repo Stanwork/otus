@@ -10,12 +10,21 @@
 
 * установка и настройка ZFS ( setup_zfs.sh )
 
-* Запуск сборки: VAGRANT_EXPERIMENTAL=disks vagrant up
+* Запуск сборки:
+```
+VAGRANT_EXPERIMENTAL=disks vagrant up
+```
 - лог сборки: [vagrant_up.txt](https://github.com/Stanwork/otus_labs/blob/main/zfs_loop/vagrant_up.txt)
 
-1. Определение алгоритма с наилучшим сжатием
+1. Определение алгоритма с наилучшим сжатием, победитель - gzip-9:
 
 ```
+[root@vmzfs ~]# zfs get all | grep compression
+otus1  compression           lzjb                   local
+otus2  compression           lz4                    local
+otus3  compression           gzip-9                 local
+otus4  compression           zle                    local
+
 [root@vmzfs ~]# zfs get all | grep compressratio | grep -v ref
 otus1            compressratio         1.35x                  -
 otus2            compressratio         1.61x                  -
