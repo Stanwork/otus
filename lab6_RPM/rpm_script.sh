@@ -23,6 +23,7 @@ rpmbuild -bb /root/rpmbuild/SPECS/nginx.spec
 yum localinstall -y /root/rpmbuild/RPMS/x86_64/nginx-1.20.2-1.el8.ngx.x86_64.rpm
 #start nginx
 systemctl start nginx
+systemctl enable nginx
 #create repo
 mkdir -p /usr/share/nginx/html/repo
 cp /root/rpmbuild/RPMS/x86_64/nginx-1.20.2-1.el8.ngx.x86_64.rpm /usr/share/nginx/html/repo/

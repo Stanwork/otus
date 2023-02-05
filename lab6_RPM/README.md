@@ -43,3 +43,17 @@ otus                  otus-linux
 otus-linux                                      2.9 MB/s | 3.0 kB     00:00    
 percona-orchestrator.x86_64                                       2:3.2.6-2.el8                                          @otus        
 ```
+* проверка доступности:
+```
+[root@rpm-test ~]# curl -a http://localhost/repo/
+<html>
+<head><title>Index of /repo/</title></head>
+<body>
+<h1>Index of /repo/</h1><hr><pre><a href="../">../</a>
+<a href="repodata/">repodata/</a>                                          05-Feb-2023 14:47                   -
+<a href="nginx-1.20.2-1.el8.ngx.x86_64.rpm">nginx-1.20.2-1.el8.ngx.x86_64.rpm</a>                  05-Feb-2023 13:56             2061172
+<a href="percona-orchestrator-3.2.6-2.el8.x86_64.rpm">percona-orchestrator-3.2.6-2.el8.x86_64.rpm</a>        16-Feb-2022 15:57             5222976
+</pre><hr></body>
+</html>
+
+```
