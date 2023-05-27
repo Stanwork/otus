@@ -1,0 +1,93 @@
+Script started on 2023-05-27 15:43:31+03:00 [TERM="xterm-256color" TTY="/dev/pts/2" COLUMNS="207" LINES="47"]
+[?2004h]0;stas@matebook: ~/Code/otus_labs/lab7_GRUB[01;32mstas@matebook[00m:[01;34m~/Code/otus_labs/lab7_GRUB[00m$ wineconsole-stable dig +short riviera-travel.rucurl -ILvk https://riviera-travel.ru[8Pdig +short riviera-travel.ru[9Pwineconsole-stable ping infra-ipa-junior-01.pd15.advanced.gtp[23Pwineconsole-stable dig +short riviera-travel.rucurl -ILvk https://riviera-travel.ru[8Pdig +short riviera-travel.ru[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kvagrant ssh
+[?2004lLast login: Sat May 27 12:40:14 2023 from 10.0.2.2
+]0;vagrant@grubtest:~[?1034h[vagrant@grubtest ~]$ sudo su
+]0;root@grubtest:/home/vagrant[?1034h[root@grubtest vagrant]# rebootsed -i 's/RenamedVG/OtusRoot/g' /etc/fstabdefault/grub[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[22Pvgrename RenamedVG OtusRoot[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Csed -i 's/OtusRoot/RenamedVG/g' /etc/default/grub[7Pfstab[1@/[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[16Pvgrename OtusRoot RenamedVG[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Clvs[Kvgspvs
+  PV         VG       Fmt  Attr PSize   PFree
+  /dev/sda3  OtusRoot lvm2 a--  <38.97g    0 
+]0;root@grubtest:/home/vagrant[root@grubtest vagrant]# pvs[K[K[Kvgs
+  VG       #PV #LV #SN Attr   VSize   VFree
+  OtusRoot   1   2   0 wz--n- <38.97g    0 
+]0;root@grubtest:/home/vagrant[root@grubtest vagrant]# lvs
+  LV       VG       Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  LogVol00 OtusRoot -wi-ao---- <37.47g                                                    
+  LogVol01 OtusRoot -wi-ao----   1.50g                                                    
+]0;root@grubtest:/home/vagrant[root@grubtest vagrant]# lvsvgspvsrebootsed -i 's/RenamedVG/OtusRoot/g' /etc/fstabdefault/grub[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[22Pvgrename RenamedVG OtusRoot[C[1P OtusRoot[1P OtusRoot[1P OtusRoot[1P OtusRoot[1P OtusRoot[1P OtusRoot[1P OtusRoot[1P OtusRoot[1P OtusRoot[1POtusRoot[C[C[C[C[C[C[C[C[C RenamedVG
+  Volume group "OtusRoot" successfully renamed to "RenamedVG"
+]0;root@grubtest:/home/vagrant[root@grubtest vagrant]# vgrename OtusRoot RenamedVG[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Clvs[Kvgspvsrebootsed -i 's/RenamedVG/OtusRoot/g' /etc/fstabdefault/grub[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[22Pvgrename RenamedVG OtusRoot[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Csed -i 's/OtusRoot/RenamedVG/g' /etc/default/grub[7Pfstab[1@/[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[16Pvgrename OtusRoot RenamedVG[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Clvs[Kvgspvsclearrebootmkinitrd -f -v /boot/initramfs-$(uname -r).img $(uname -r)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[32Pgrep VolGroup00 /etc/fstab[C[C[1P /etc/fstab[1P /etc/fstab[1P /etc/fstab[1P /etc/fstab[1P /etc/fstab[1P /etc/fstab[1P /etc/fstab[1P /etc/fstab[1P /etc/fstab[1P /etc/fstabO /etc/fstabt /etc/fstabu /etc/fstabs /etc/fstabR /etc/fstabo /etc/fstabo /etc/fstabt /etc/fstab
+/dev/mapper/[01;31m[KOtusRoot[m[K-LogVol00 /                       xfs     defaults        0 0
+/dev/mapper/[01;31m[KOtusRoot[m[K-LogVol01 swap                    swap    defaults        0 0
+]0;root@grubtest:/home/vagrant[root@grubtest vagrant]# grep OtusRoot /etc/fstabvgrename OtusRoot RenamedVG[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Clvs[Kvgspvsrebootsed -i 's/RenamedVG/OtusRoot/g' /etc/fstabdefault/grub[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[C[C[C[C[C[C[C[C[C[C[1@/[1@R[1@e[1@n[1@a[1@m[1@e[1@d[1@V[1@G[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[Kfstab
+]0;root@grubtest:/home/vagrant[root@grubtest vagrant]# sed -i 's/OtusRoot/RenamedVG/g' /etc/fstab[K[K[K[K[Kdeg[Kfault/grub
+]0;root@grubtest:/home/vagrant[root@grubtest vagrant]# sed -i 's/OtusRoot/RenamedVG/g' /etc/default/grub[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kboot/grub2/grub.cfg
+]0;root@grubtest:/home/vagrant[root@grubtest vagrant]# sed -i 's/OtusRoot/RenamedVG/g' /boot/grub2/grub.cfg[3Petc/default/grub[7Pfstab[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[18Pgrep OtusRoot[C[C[C[C[C[C[C[C[C[C[C[1P /etc/fstab[1P /etc/fstab[1P /etc/fstab[1P /etc/fstab[1P /etc/fstab[1P /etc/fstab[1P /etc/fstab[1P /etc/fstabR /etc/fstabe /etc/fstabn /etc/fstaba /etc/fstabm /etc/fstabe /etc/fstabd /etc/fstabV /etc/fstabG /etc/fstab[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[Kboot/grub2/grub.cfg
+	linux16 /vmlinuz-3.10.0-862.2.3.el7.x86_64 root=/dev/mapper/[01;31m[KRenamedVG[m[K-LogVol00 ro no_timer_check console=tty0 console=ttyS0,115200n8 net.ifnames=0 biosdevname=0 elevator=noop crashkernel=auto rd.lvm.lv=[01;31m[KRenamedVG[m[K/LogVol00 rd.lvm.lv=[01;31m[KRenamedVG[m[K/LogVol01 rhgb quiet 
+]0;root@grubtest:/home/vagrant[root@grubtest vagrant]# grep RenamedVG /boot/grub2/grub.cfg[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[17@sed -i 's/OtusRoot/RenamedVG/g'[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[3Petc/default/grub[7Pfstab[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[18Pgrep OtusRoot[C[C[C[C[C[C[C[C[C[C[Cvgrename OtusRoot RenamedVG[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Clvs[Kvgspvsrebootsed -i 's/RenamedVG/OtusRoot/g' /etc/fstabdefault/grub[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[22Pvgrename RenamedVG OtusRoot[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Csed -i 's/OtusRoot/RenamedVG/g' /etc/default/grub[7Pfstab[1@/[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[16Pvgrename OtusRoot RenamedVG[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Clvs[Kvgspvsclearrebootmkinitrd -f -v /boot/initramfs-$(uname -r).img $(uname -r)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[32Pgrep VolGroup00 /etc/fstabmkinitrd -f -v /boot/initramfs-$(uname -r).img $(uname -r)
+Executing: /sbin/dracut -f -v /boot/initramfs-3.10.0-862.2.3.el7.x86_64.img 3.10.0-862.2.3.el7.x86_64
+dracut module 'busybox' will not be installed, because command 'busybox' could not be found!
+dracut module 'crypt' will not be installed, because command 'cryptsetup' could not be found!
+dracut module 'dmraid' will not be installed, because command 'dmraid' could not be found!
+dracut module 'dmsquash-live-ntfs' will not be installed, because command 'ntfs-3g' could not be found!
+dracut module 'mdraid' will not be installed, because command 'mdadm' could not be found!
+dracut module 'multipath' will not be installed, because command 'multipath' could not be found!
+dracut module 'busybox' will not be installed, because command 'busybox' could not be found!
+dracut module 'crypt' will not be installed, because command 'cryptsetup' could not be found!
+dracut module 'dmraid' will not be installed, because command 'dmraid' could not be found!
+dracut module 'dmsquash-live-ntfs' will not be installed, because command 'ntfs-3g' could not be found!
+dracut module 'mdraid' will not be installed, because command 'mdadm' could not be found!
+dracut module 'multipath' will not be installed, because command 'multipath' could not be found!
+*** Including module: bash ***
+*** Including module: nss-softokn ***
+*** Including module: i18n ***
+*** Including module: drm ***
+*** Including module: plymouth ***
+*** Including module: dm ***
+Skipping udev rule: 64-device-mapper.rules
+Skipping udev rule: 60-persistent-storage-dm.rules
+Skipping udev rule: 55-dm.rules
+*** Including module: kernel-modules ***
+Omitting driver floppy
+*** Including module: lvm ***
+Skipping udev rule: 64-device-mapper.rules
+Skipping udev rule: 56-lvm.rules
+Skipping udev rule: 60-persistent-storage-lvm.rules
+*** Including module: qemu ***
+*** Including module: resume ***
+*** Including module: rootfs-block ***
+*** Including module: terminfo ***
+*** Including module: udev-rules ***
+Skipping udev rule: 40-redhat-cpu-hotplug.rules
+Skipping udev rule: 91-permissions.rules
+*** Including module: biosdevname ***
+*** Including module: systemd ***
+*** Including module: usrmount ***
+*** Including module: base ***
+*** Including module: fs-lib ***
+*** Including module: shutdown ***
+*** Including modules done ***
+*** Installing kernel module dependencies and firmware ***
+*** Installing kernel module dependencies and firmware done ***
+*** Resolving executable dependencies ***
+*** Resolving executable dependencies done***
+*** Hardlinking files ***
+*** Hardlinking files done ***
+*** Stripping files ***
+*** Stripping files done ***
+*** Generating early-microcode cpio image contents ***
+*** No early-microcode cpio image needed ***
+*** Store current command line parameters ***
+*** Creating image file ***
+*** Creating image file done ***
+*** Creating initramfs image file '/boot/initramfs-3.10.0-862.2.3.el7.x86_64.img' done ***
+]0;root@grubtest:/home/vagrant[root@grubtest vagrant]# [K[root@grubtest vagrant]# [K[root@grubtest vagrant]# reboot
+Connection to 127.0.0.1 closed by remote host.
+[?2004h]0;stas@matebook: ~/Code/otus_labs/lab7_GRUB[01;32mstas@matebook[00m:[01;34m~/Code/otus_labs/lab7_GRUB[00m$ ^C[?2004l[?2004h[?2004l
+[?2004h]0;stas@matebook: ~/Code/otus_labs/lab7_GRUB[01;32mstas@matebook[00m:[01;34m~/Code/otus_labs/lab7_GRUB[00m$ 
+[?2004l[?2004h]0;stas@matebook: ~/Code/otus_labs/lab7_GRUB[01;32mstas@matebook[00m:[01;34m~/Code/otus_labs/lab7_GRUB[00m$ 
+[?2004l[?2004h]0;stas@matebook: ~/Code/otus_labs/lab7_GRUB[01;32mstas@matebook[00m:[01;34m~/Code/otus_labs/lab7_GRUB[00m$ 
+[?2004l[?2004h]0;stas@matebook: ~/Code/otus_labs/lab7_GRUB[01;32mstas@matebook[00m:[01;34m~/Code/otus_labs/lab7_GRUB[00m$ 
+[?2004l[?2004h]0;stas@matebook: ~/Code/otus_labs/lab7_GRUB[01;32mstas@matebook[00m:[01;34m~/Code/otus_labs/lab7_GRUB[00m$ 
+[?2004l[?2004h]0;stas@matebook: ~/Code/otus_labs/lab7_GRUB[01;32mstas@matebook[00m:[01;34m~/Code/otus_labs/lab7_GRUB[00m$ ke[K[Kexit
+[?2004lexit
+
+Script done on 2023-05-27 15:52:12+03:00 [COMMAND_EXIT_CODE="255"]
