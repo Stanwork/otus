@@ -1,0 +1,43 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+home = ENV['HOME']
+ENV["LC_ALL"] = "en_US.UTF-8"
+
+Vagrant.configure("2") do |config|
+
+    config.vm.box = 'almalinux/9'
+  config.vbguest.iso_path = ".vagrant/VBoxGuestAdditions_6.1.40.iso"
+  config.vm.define "server" do |server|
+  
+    server.vm.provider "virtualbox" do |vb|
+      vb.memory = "1024"
+      vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    end
+  
+    server.vm.disk :disk, size: "1GB", name: "sdisk1"
+    server.vm.disk :disk, size: "1GB", name: "sdisk2"
+    server.vm.disk :disk, size: "1GB", name: "sdisk3"
+    server.vm.host_name = 'server'
+    server.vm.network :private_network, ip: "192.168.56.41"
+  
+  
+  
+    server.vm.provision "shell",
+      name: "Setup zfs",
+      path: "setup_zfs.sh"
+    end
+  
+  
+    config.vm.define "client" do |client|
+      client.vm.host_name = 'client'
+      client.vm.network :private_network, ip: "192.168.56.40"
+      client.vm.disk :disk, size: "1GB", name: "cdisk1"
+      client.vm.disk :disk, size: "1GB", name: "cdisk2"
+      client.vm.disk :disk, size: "1GB", name: "cdisk3"
+      client.vm.provider :virtualbox do |vb|
+        vb.memory = "1024"
+        vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      end
+    end
+  
+  end
