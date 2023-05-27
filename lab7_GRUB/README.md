@@ -51,7 +51,7 @@
   LogVol01 RenamedVG -wi-ao----   1.50g        
 ```
 Лог:
-[vg_rename.txt](lab7_GRUB/vg_rename.txt)
+[vg_rename.txt](vg_rename.txt)
 
 
 
@@ -85,7 +85,9 @@ Executing: /sbin/dracut -f -v /boot/initramfs-3.10.0-862.2.3.el7.x86_64.img 3.10
 test
 [root@grubtest 01test]# reboot
 ```
-При загрузке выключены rghb и quiet пауза на 10 секунд и пингвин в выводе терминала.
+При загрузке выключены rghb и quiet пауза на 10 секунд и пингвин в выводе терминала:
+
+![penguin](penguin.png)
 
 Лог:
-[vg_renamed_done.txt](lab7_GRUB/vg_renamed_done.txt)
+[vg_renamed_done.txt](vg_renamed_done.txt)
