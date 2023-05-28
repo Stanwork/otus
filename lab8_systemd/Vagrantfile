@@ -1,0 +1,34 @@
+# -*- mode: ruby -*-
+# vim: set ft=ruby :
+home = ENV['HOME']
+ENV["LC_ALL"] = "en_US.UTF-8"
+MACHINES = {
+    :labsystemd => {
+      :box_name => 'centos/7',
+      :cpus => 2,
+      :memory => 1024,
+      :ip_addr => '192.168.56.101',
+    }
+}
+Vagrant.configure("2") do |config|
+    MACHINES.each do |boxname, boxconfig|
+        config.vm.synced_folder ".", "/vagrant", disabled: true
+        if Vagrant.has_plugin?("vagrant-vbguest") then
+          config.vbguest.auto_update = false
+        end
+        config.vm.define boxname do |box1|
+            box1.vm.box = boxconfig[:box_name]
+#            box1.vm.box_version = boxconfig[:box_version]
+            box1.vm.host_name = boxname.to_s
+            box1.vm.network "private_network", :name => 'vboxnet0', :adapter => 2, ip: boxconfig[:ip_addr]
+            box1.vm.provider "virtualbox" do |v|
+                v.memory = boxconfig[:memory]
+                v.cpus = boxconfig[:cpus]
+                v.customize ["modifyvm", :id, "--audio", "none"]
+            end
+            box1.vm.provision :shell, :inline => "setenforce 0", run: "always"
+            box1.vm.provision "file", source: "./scripts/", destination: "/tmp/"
+            box1.vm.provision "shell", path: "./scripts/provision.sh"
+        end
+    end
+end
