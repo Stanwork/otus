@@ -1,0 +1,203 @@
+Script started on 2023-07-01 15:39:16+03:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="211" LINES="53"]
+]0;stas@vmalma0:~/otus/lab15_ansible[?2004h[stas@vmalma0 lab15_ansible]$ exitansible nginx -m yum -a "name=epel-release state=present" -bsystemd -a name=firewalld | grep ActiveState[23Pcommand -a "uname -r"ping[K[3Pcat staging/hosts [2Pansible.cfg[C
+[?2004l[defaults]
+inventory = staging/hosts
+remote_user = vagrant
+host_key_checking = False
+retry_files_enabled = False
+]0;stas@vmalma0:~/otus/lab15_ansible[?2004h[stas@vmalma0 lab15_ansible]$ cat ansible.cfg exit[Kansible nginx -m yum -a "name=epel-release state=present" -bsystemd -a name=firewalld | grep ActiveState[23Pcommand -a "uname -r"ping[K[3Pcat staging/hosts 
+[?2004l[web]
+nginx ansible_host=127.0.0.1 ansible_port=2222 ansible_private_key_file=.vagrant/machines/nginxvm/virtualbox/private_key
+]0;stas@vmalma0:~/otus/lab15_ansible[?2004h[stas@vmalma0 lab15_ansible]$ cat staging/hosts [2Pansible.cfg[Cexit[Kansible nginx -m yum -a "name=epel-release state=present" -bsystemd -a name=firewalld | grep ActiveState[23Pcommand -a "uname -r"ping[K
+[?2004l[0;32mnginx | SUCCESS => {[0m
+[0;32m    "ansible_facts": {[0m
+[0;32m        "discovered_interpreter_python": "/usr/libexec/platform-python"[0m
+[0;32m    },[0m
+[0;32m    "changed": false,[0m
+[0;32m    "ping": "pong"[0m
+[0;32m}[0m
+]0;stas@vmalma0:~/otus/lab15_ansible[?2004h[stas@vmalma0 lab15_ansible]$ ansible nginx -m ping[3Pcat staging/hosts [2Pansible.cfg[Cexit[Kansible nginx -m yum -a "name=epel-release state=present" -bsystemd -a name=firewalld | grep ActiveState
+[?2004l        "[01;31m[KActiveState[m[K": "inactive",
+]0;stas@vmalma0:~/otus/lab15_ansible[?2004h[stas@vmalma0 lab15_ansible]$ ansible nginx -m systemd -a name=firewalld | grep ActiveStateping[K[3Pcat staging/hosts [2Pansible.cfg[Cexit[Kansible nginx -m yum -a "name=epel-release state=present" -b
+[?2004l[0;33mnginx | CHANGED => {[0m
+[0;33m    "ansible_facts": {[0m
+[0;33m        "discovered_interpreter_python": "/usr/libexec/platform-python"[0m
+[0;33m    },[0m
+[0;33m    "changed": true,[0m
+[0;33m    "msg": "",[0m
+[0;33m    "rc": 0,[0m
+[0;33m    "results": [[0m
+[0;33m        "Installed: epel-release-8-11.el8.noarch"[0m
+[0;33m    ][0m
+[0;33m}[0m
+]0;stas@vmalma0:~/otus/lab15_ansible[?2004h[stas@vmalma0 lab15_ansible]$ [K[stas@vmalma0 lab15_ansible]$ [K[stas@vmalma0 lab15_ansible]$ [K[stas@vmalma0 lab15_ansible]$ [K[stas@vmalma0 lab15_ansible]$ [K[stas@vmalma0 lab15_ansible]$ [K[stas@vmalma0 lab15_ansible]$ [K[stas@vmalma0 lab15_ansible]$ [K[stas@vmalma0 lab15_ansible]$ [K[stas@vmalma0 lab15_ansible]$ [K[stas@vmalma0 lab15_ansible]$ [K[stas@vmalma0 lab15_ansible]$ [K[stas@vmalma0 lab15_ansible]$ [K[stas@vmalma0 lab15_ansible]$ [K[stas@vmalma0 lab15_ansible]$ [K[stas@vmalma0 lab15_ansible]$ [K[stas@vmalma0 lab15_ansible]$ [K[stas@vmalma0 lab15_ansible]$ ansible-playbook 
+ansible.cfg        playbooks/         staging/           .vagrant/
+lab15_ansible.txt  Read.me            templates/         Vagrantfile
+[stas@vmalma0 lab15_ansible]$ ansible-playbook playbooks/
+nginx.yml  play.yml   roles/     
+[stas@vmalma0 lab15_ansible]$ ansible-playbook playbooks/play.yml 
+[?2004l
+PLAY [NGINX | Install and configure NGINX] *********************************************
+
+TASK [Gathering Facts] *****************************************************************
+[0;32mok: [nginx][0m
+
+TASK [epel : NGINX | Install EPEL Repo package from standart repo] *********************
+[0;32mok: [nginx][0m
+
+TASK [nginx : NGINX | Install NGINX package from EPEL Repo] ****************************
+[0;33mchanged: [nginx][0m
+
+TASK [nginx : NGINX | Create NGINX config file from temlate] ***************************
+[0;33mchanged: [nginx][0m
+
+RUNNING HANDLER [nginx : restart nginx] ************************************************
+[0;33mchanged: [nginx][0m
+
+RUNNING HANDLER [nginx : reload nginx] *************************************************
+[0;33mchanged: [nginx][0m
+
+PLAY RECAP *****************************************************************************
+[0;33mnginx[0m                      : [0;32mok=6   [0m [0;33mchanged=4   [0m unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+]0;stas@vmalma0:~/otus/lab15_ansible[?2004h[stas@vmalma0 lab15_ansible]$ curl 19[K[K127.0.0.1:8080-127.0.0.1:8080v127.0.0.1:8080 127.0.0.1:8080
+[?2004l*   Trying 127.0.0.1:8080...
+* Connected to 127.0.0.1 (127.0.0.1) port 8080 (#0)
+> GET / HTTP/1.1
+> Host: 127.0.0.1:8080
+> User-Agent: curl/7.76.1
+> Accept: */*
+> 
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 OK
+< Server: nginx/1.14.1
+< Date: Sat, 01 Jul 2023 12:45:02 GMT
+< Content-Type: text/html
+< Content-Length: 4057
+< Last-Modified: Mon, 07 Oct 2019 21:16:24 GMT
+< Connection: keep-alive
+< ETag: "5d9bab28-fd9"
+< Accept-Ranges: bytes
+< 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+    <head>
+        <title>Test Page for the Nginx HTTP Server on Red Hat Enterprise Linux</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <style type="text/css">
+            /*<![CDATA[*/
+            body {
+                background-color: #fff;
+                color: #000;
+                font-size: 0.9em;
+                font-family: sans-serif,helvetica;
+                margin: 0;
+                padding: 0;
+            }
+            :link {
+                color: #c00;
+            }
+            :visited {
+                color: #c00;
+            }
+            a:hover {
+                color: #f50;
+            }
+            h1 {
+                text-align: center;
+                margin: 0;
+                padding: 0.6em 2em 0.4em;
+                background-color: #900;
+                color: #fff;
+                font-weight: normal;
+                font-size: 1.75em;
+                border-bottom: 2px solid #000;
+            }
+            h1 strong {
+                font-weight: bold;
+                font-size: 1.5em;
+            }
+            h2 {
+                text-align: center;
+                background-color: #900;
+                font-size: 1.1em;
+                font-weight: bold;
+                color: #fff;
+                margin: 0;
+                padding: 0.5em;
+                border-bottom: 2px solid #000;
+            }
+            hr {
+                display: none;
+            }
+            .content {
+                padding: 1em 5em;
+            }
+            .alert {
+                border: 2px solid #000;
+            }
+
+            img {
+                border: 2px solid #fff;
+                padding: 2px;
+                margin: 2px;
+            }
+            a:hover img {
+                border: 2px solid #294172;
+            }
+            .logos {
+                margin: 1em;
+                text-align: center;
+            }
+            /*]]>*/
+        </style>
+    </head>
+
+    <body>
+        <h1>Welcome to <strong>nginx</strong> on Red Hat Enterprise Linux!</h1>
+
+        <div class="content">
+            <p>This page is used to test the proper operation of the
+            <strong>nginx</strong> HTTP server after it has been
+            installed. If you can read this page, it means that the
+            web server installed at this site is working
+            properly.</p>
+
+            <div class="alert">
+                <h2>Website Administrator</h2>
+                <div class="content">
+                    <p>This is the default <tt>index.html</tt> page that
+                    is distributed with <strong>nginx</strong> on
+                    Red Hat Enterprise Linux.  It is located in
+                    <tt>/usr/share/nginx/html</tt>.</p>
+
+                    <p>You should now put your content in a location of
+                    your choice and edit the <tt>root</tt> configuration
+                    directive in the <strong>nginx</strong>
+                    configuration file
+                    <tt>/etc/nginx/nginx.conf</tt>.</p>
+
+                    <p>For information on Red Hat Enterprise Linux, please visit the <a href="http://www.redhat.com/">Red Hat, Inc. website</a>. The documentation for Red Hat Enterprise Linux is <a href="http://www.redhat.com/docs/manuals/enterprise/">available on the Red Hat, Inc. website</a>.</p>
+
+                </div>
+            </div>
+
+            <div class="logos">
+                <a href="http://nginx.net/"><img
+                    src="nginx-logo.png" 
+                    alt="[ Powered by nginx ]"
+                    width="121" height="32" /></a>
+                <a href="http://www.redhat.com/"><img
+                    src="poweredby.png"
+                    alt="[ Powered by Red Hat Enterprise Linux ]"
+                    width="88" height="31" /></a>
+            </div>
+        </div>
+    </body>
+</html>
+* Connection #0 to host 127.0.0.1 left intact
+]0;stas@vmalma0:~/otus/lab15_ansible[?2004h[stas@vmalma0 lab15_ansible]$ [K[stas@vmalma0 lab15_ansible]$ [K[stas@vmalma0 lab15_ansible]$ exit
+[?2004lexit
+
+Script done on 2023-07-01 15:45:33+03:00 [COMMAND_EXIT_CODE="0"]
