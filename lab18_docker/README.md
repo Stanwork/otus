@@ -5,7 +5,7 @@
 
 -----------------------------------------------------------------------------------------------------------------------
 
-* [Dockerfile](./Dockerfile):
+*  __[Dockerfile](./Dockerfile):__
 ```
 FROM nginx:stable
 
@@ -19,7 +19,7 @@ COPY nginx_3000.conf /etc/nginx/conf.d/
 COPY ./html/ /usr/share/nginx/html/
 ```
 
-* Сборка образа:
+* __Сборка образа:__
 ```
 [root@vmalma0 lab18_docker]# docker build -t nginx-3000 .
 [+] Building 5.0s (9/9) FINISHED                                                                                                                                                                                   
@@ -43,7 +43,7 @@ REPOSITORY   TAG       IMAGE ID       CREATED         SIZE
 nginx-3000   latest    fad9da25dad1   8 seconds ago   142MB
 ```
 
-* Запуск контейнера с пробросом портов и вольюмов для хранения html и логов:
+* __Запуск контейнера с пробросом портов и вольюмов для хранения html и логов:__
 ```
 [root@vmalma0 lab18_docker]# docker run --rm --name mynginx -p 80:80 -p 3000:3000 -v nginx_html:/usr/share/nginx/html -v nginx_logs:/log/nginx -d nginx-3000
 5c5af0a49176b9da1675c6210e49a7c3edb4ac8356a3290a930d60bd40750fdb
@@ -52,7 +52,7 @@ CONTAINER ID   IMAGE        COMMAND                  CREATED         STATUS     
 5c5af0a49176   nginx-3000   "/docker-entrypoint.…"   5 seconds ago   Up 4 seconds   0.0.0.0:80->80/tcp, :::80->80/tcp, 0.0.0.0:3000->3000/tcp, :::3000->3000/tcp   mynginx
 ```
 
-* Доступность по портам 80 и 3000:
+* __Доступность по портам 80 и 3000:__
 ```
 [root@vmalma0 lab18_docker]# curl localhost
 <!DOCTYPE html>
@@ -82,7 +82,7 @@ CONTAINER ID   IMAGE        COMMAND                  CREATED         STATUS     
 </html>      
 ```
 
-* Volumes:
+* __Volumes:__
 ```
 [root@vmalma0 lab18_docker]# docker volume ls
 DRIVER    VOLUME NAME
@@ -115,7 +115,7 @@ local     nginx_logs
 
 ```
 
-* Проверка записи в логи:
+* __Проверка записи в логи:__
 ```
 [root@vmalma0 lab18_docker]# tail /var/lib/docker/volumes/nginx_logs/_data/access.log 
 172.17.0.1 - - [02/Jul/2023:14:40:53 +0000] "GET / HTTP/1.1" 200 211 "-" "curl/7.76.1" "-"
@@ -142,5 +142,5 @@ local     nginx_logs
 2023/07/02 14:44:04 [error] 30#30: *3 open() "/usr/share/nginx/html/failcheck" failed (2: No such file or directory), client: 172.17.0.1, server: localhost, request: "GET /failcheck HTTP/1.1", host: "localhost"
 ```
 
-* Лог выполнения:
+* __Лог выполнения:__
 [lab18_docker_log.txt](lab18_docker_log.txt)
