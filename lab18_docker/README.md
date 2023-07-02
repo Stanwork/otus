@@ -18,7 +18,8 @@ COPY nginx_3000.conf /etc/nginx/conf.d/
 #content:
 COPY ./html/ /usr/share/nginx/html/
 ```
-Сборка образа:
+
+* Сборка образа:
 ```
 [root@vmalma0 lab18_docker]# docker build -t nginx-3000 .
 [+] Building 5.0s (9/9) FINISHED                                                                                                                                                                                   
