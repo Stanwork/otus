@@ -1,0 +1,257 @@
+Script started on 2023-08-02 15:42:48+03:00 [TERM="xterm-256color" TTY="/dev/pts/2" COLUMNS="211" LINES="55"]
+[?2004h]0;stas@matebook: ~/Code/otus_labs/lab41_DynWeb[01;32mstas@matebook[00m:[01;34m~/Code/otus_labs/lab41_DynWeb[00m$ c[Kvagrant ssh
+[?2004lWelcome to Ubuntu 20.04.6 LTS (GNU/Linux 5.4.0-148-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Aug  2 12:42:56 UTC 2023
+
+  System load:                      0.79
+  Usage of /:                       12.1% of 38.70GB
+  Memory usage:                     76%
+  Swap usage:                       0%
+  Processes:                        134
+  Users logged in:                  0
+  IPv4 address for br-c3382584ae9b: 172.18.0.1
+  IPv4 address for docker0:         172.17.0.1
+  IPv4 address for enp0s3:          10.0.2.15
+  IPv4 address for enp0s8:          192.168.56.111
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+93 updates can be applied immediately.
+57 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+New release '22.04.2 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Wed Aug  2 12:39:25 2023 from 10.0.2.2
+]0;vagrant@dynweb: ~[01;32mvagrant@dynweb[00m:[01;34m~[00m$ docker0[K ps
+CONTAINER ID   IMAGE                        COMMAND                  CREATED              STATUS              PORTS                                                                   NAMES
+1b93211f2e04   nginx:1.15.12-alpine         "nginx -g 'daemon of…"   About a minute ago   Up About a minute   80/tcp, 0.0.0.0:8081-8083->8081-8083/tcp, :::8081-8083->8081-8083/tcp   nginx
+27d09d57e221   wordpress:6.2.2-fpm-alpine   "docker-entrypoint.s…"   About a minute ago   Up About a minute   9000/tcp                                                                wordpress
+f2ccbab9c2af   mysql:8.0.34                 "docker-entrypoint.s…"   About a minute ago   Up About a minute   3306/tcp, 33060/tcp                                                     database
+4f44a17b3e98   project_app                  "gunicorn --workers=…"   About a minute ago   Up About a minute                                                                           app
+a58e31e1f746   node:16.13.2-alpine3.15      "docker-entrypoint.s…"   About a minute ago   Up About a minute                                                                           node
+]0;vagrant@dynweb: ~[01;32mvagrant@dynweb[00m:[01;34m~[00m$ ss -tunlp
+Netid                State                 Recv-Q                Send-Q                                  Local Address:Port                                Peer Address:Port                Process                
+udp                  UNCONN                0                     0                                       127.0.0.53%lo:53                                       0.0.0.0:*                                          
+udp                  UNCONN                0                     0                                    10.0.2.15%enp0s3:68                                       0.0.0.0:*                                          
+tcp                  LISTEN                0                     4096                                          0.0.0.0:8081                                     0.0.0.0:*                                          
+tcp                  LISTEN                0                     4096                                          0.0.0.0:8082                                     0.0.0.0:*                                          
+tcp                  LISTEN                0                     4096                                          0.0.0.0:8083                                     0.0.0.0:*                                          
+tcp                  LISTEN                0                     4096                                    127.0.0.53%lo:53                                       0.0.0.0:*                                          
+tcp                  LISTEN                0                     128                                           0.0.0.0:22                                       0.0.0.0:*                                          
+tcp                  LISTEN                0                     4096                                             [::]:8081                                        [::]:*                                          
+tcp                  LISTEN                0                     4096                                             [::]:8082                                        [::]:*                                          
+tcp                  LISTEN                0                     4096                                             [::]:8083                                        [::]:*                                          
+tcp                  LISTEN                0                     128                                              [::]:22                                          [::]:*                                          
+]0;vagrant@dynweb: ~[01;32mvagrant@dynweb[00m:[01;34m~[00m$ curl loval[K[K[Kcalhost:8081|head
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100 16351  100 16351    0     0   371k      0 --:--:-- --:--:-- --:--:--  371k
+
+<!doctype html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Django: the Web framework for perfectionists with deadlines.</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="/static/admin/css/fonts.css">
+        <style type="text/css">
+]0;vagrant@dynweb: ~[01;32mvagrant@dynweb[00m:[01;34m~[00m$ curl localhost:8081|head[1P|head2|head
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100    25  100    25    0     0    280      0 --:--:-- --:--:-- --:--:--   280
+Hello from node js server]0;vagrant@dynweb: ~[01;32mvagrant@dynweb[00m:[01;34m~[00m$ curl localhost:8082|head[1P|head4|head[1P|head3|head
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+]0;vagrant@dynweb: ~[01;32mvagrant@dynweb[00m:[01;34m~[00m$ curl localhost:8083|head[K[K[K[K[K
+]0;vagrant@dynweb: ~[01;32mvagrant@dynweb[00m:[01;34m~[00m$ http://localhost:8083/wp-admin/install.php[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[23Pcurl localhost:8083http://localhost:8083/wp-admin/install.phpchttp://localhost:8083/wp-admin/install.php[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cuhttp://localhost:8083/wp-admin/install.php[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Crhttp://localhost:8083/wp-admin/install.php[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Clhttp://localhost:8083/wp-admin/install.php[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C http://localhost:8083/wp-admin/install.php[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+<!DOCTYPE html>
+<html lang="en-US" xml:lang="en-US">
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="robots" content="noindex,nofollow" />
+	<title>WordPress &rsaquo; Installation</title>
+	<link rel='stylesheet' id='dashicons-css' href='http://localhost:8083/wp-includes/css/dashicons.min.css?ver=6.2.2' type='text/css' media='all' />
+<link rel='stylesheet' id='buttons-css' href='http://localhost:8083/wp-includes/css/buttons.min.css?ver=6.2.2' type='text/css' media='all' />
+<link rel='stylesheet' id='forms-css' href='http://localhost:8083/wp-admin/css/forms.min.css?ver=6.2.2' type='text/css' media='all' />
+<link rel='stylesheet' id='l10n-css' href='http://localhost:8083/wp-admin/css/l10n.min.css?ver=6.2.2' type='text/css' media='all' />
+<link rel='stylesheet' id='install-css' href='http://localhost:8083/wp-admin/css/install.min.css?ver=6.2.2' type='text/css' media='all' />
+</head>
+<body class="wp-core-ui language-chooser">
+<p id="logo">WordPress</p>
+
+	<form id="setup" method="post" action="?step=1"><label class='screen-reader-text' for='language'>Select a default language</label>
+<select size='14' name='language' id='language'>
+<option value="" lang="en" selected="selected" data-continue="Continue" data-installed="1">English (United States)</option>
+<option value="af" lang="af" data-continue="Gaan voort">Afrikaans</option>
+<option value="am" lang="am" data-continue="ቀጥል">አማርኛ</option>
+<option value="arg" lang="an" data-continue="Continar">Aragonés</option>
+<option value="ar" lang="ar" data-continue="متابعة">العربية</option>
+<option value="ary" lang="ar" data-continue="المتابعة">العربية المغربية</option>
+<option value="as" lang="as" data-continue="Continue">অসমীয়া</option>
+<option value="azb" lang="az" data-continue="Continue">گؤنئی آذربایجان</option>
+<option value="az" lang="az" data-continue="Davam">Azərbaycan dili</option>
+<option value="bel" lang="be" data-continue="Працягнуць">Беларуская мова</option>
+<option value="bg_BG" lang="bg" data-continue="Напред">Български</option>
+<option value="bn_BD" lang="bn" data-continue="চালিয়ে যান">বাংলা</option>
+<option value="bo" lang="bo" data-continue="མུ་མཐུད་དུ།">བོད་ཡིག</option>
+<option value="bs_BA" lang="bs" data-continue="Nastavi">Bosanski</option>
+<option value="ca" lang="ca" data-continue="Continua">Català</option>
+<option value="ceb" lang="ceb" data-continue="Padayun">Cebuano</option>
+<option value="cs_CZ" lang="cs" data-continue="Pokračovat">Čeština</option>
+<option value="cy" lang="cy" data-continue="Parhau">Cymraeg</option>
+<option value="da_DK" lang="da" data-continue="Fortsæt">Dansk</option>
+<option value="de_CH" lang="de" data-continue="Weiter">Deutsch (Schweiz)</option>
+<option value="de_DE_formal" lang="de" data-continue="Weiter">Deutsch (Sie)</option>
+<option value="de_DE" lang="de" data-continue="Weiter">Deutsch</option>
+<option value="de_CH_informal" lang="de" data-continue="Weiter">Deutsch (Schweiz, Du)</option>
+<option value="de_AT" lang="de" data-continue="Weiter">Deutsch (Österreich)</option>
+<option value="dsb" lang="dsb" data-continue="Dalej">Dolnoserbšćina</option>
+<option value="dzo" lang="dz" data-continue="Continue">རྫོང་ཁ</option>
+<option value="el" lang="el" data-continue="Συνέχεια">Ελληνικά</option>
+<option value="en_CA" lang="en" data-continue="Continue">English (Canada)</option>
+<option value="en_AU" lang="en" data-continue="Continue">English (Australia)</option>
+<option value="en_GB" lang="en" data-continue="Continue">English (UK)</option>
+<option value="en_ZA" lang="en" data-continue="Continue">English (South Africa)</option>
+<option value="en_NZ" lang="en" data-continue="Continue">English (New Zealand)</option>
+<option value="eo" lang="eo" data-continue="Daŭrigi">Esperanto</option>
+<option value="es_MX" lang="es" data-continue="Continuar">Español de México</option>
+<option value="es_AR" lang="es" data-continue="Continuar">Español de Argentina</option>
+<option value="es_ES" lang="es" data-continue="Continuar">Español</option>
+<option value="es_CR" lang="es" data-continue="Continuar">Español de Costa Rica</option>
+<option value="es_DO" lang="es" data-continue="Continuar">Español de República Dominicana</option>
+<option value="es_PE" lang="es" data-continue="Continuar">Español de Perú</option>
+<option value="es_CL" lang="es" data-continue="Continuar">Español de Chile</option>
+<option value="es_UY" lang="es" data-continue="Continuar">Español de Uruguay</option>
+<option value="es_PR" lang="es" data-continue="Continuar">Español de Puerto Rico</option>
+<option value="es_CO" lang="es" data-continue="Continuar">Español de Colombia</option>
+<option value="es_GT" lang="es" data-continue="Continuar">Español de Guatemala</option>
+<option value="es_EC" lang="es" data-continue="Continuar">Español de Ecuador</option>
+<option value="es_VE" lang="es" data-continue="Continuar">Español de Venezuela</option>
+<option value="et" lang="et" data-continue="Jätka">Eesti</option>
+<option value="eu" lang="eu" data-continue="Jarraitu">Euskara</option>
+<option value="fa_AF" lang="fa" data-continue="ادامه">(فارسی (افغانستان</option>
+<option value="fa_IR" lang="fa" data-continue="ادامه">فارسی</option>
+<option value="fi" lang="fi" data-continue="Jatka">Suomi</option>
+<option value="fr_CA" lang="fr" data-continue="Continuer">Français du Canada</option>
+<option value="fr_FR" lang="fr" data-continue="Continuer">Français</option>
+<option value="fr_BE" lang="fr" data-continue="Continuer">Français de Belgique</option>
+<option value="fur" lang="fur" data-continue="Continue">Friulian</option>
+<option value="fy" lang="fy" data-continue="Trochgean">Frysk</option>
+<option value="gd" lang="gd" data-continue="Lean air adhart">Gàidhlig</option>
+<option value="gl_ES" lang="gl" data-continue="Continuar">Galego</option>
+<option value="gu" lang="gu" data-continue="ચાલુ રાખો">ગુજરાતી</option>
+<option value="haz" lang="haz" data-continue="ادامه">هزاره گی</option>
+<option value="he_IL" lang="he" data-continue="המשך">עִבְרִית</option>
+<option value="hi_IN" lang="hi" data-continue="जारी रखें">हिन्दी</option>
+<option value="hr" lang="hr" data-continue="Nastavi">Hrvatski</option>
+<option value="hsb" lang="hsb" data-continue="Dale">Hornjoserbšćina</option>
+<option value="hu_HU" lang="hu" data-continue="Folytatás">Magyar</option>
+<option value="hy" lang="hy" data-continue="Շարունակել">Հայերեն</option>
+<option value="id_ID" lang="id" data-continue="Lanjutkan">Bahasa Indonesia</option>
+<option value="is_IS" lang="is" data-continue="Áfram">Íslenska</option>
+<option value="it_IT" lang="it" data-continue="Continua">Italiano</option>
+<option value="ja" lang="ja" data-continue="次へ">日本語</option>
+<option value="jv_ID" lang="jv" data-continue="Nerusaké">Basa Jawa</option>
+<option value="ka_GE" lang="ka" data-continue="გაგრძელება">ქართული</option>
+<option value="kab" lang="kab" data-continue="Kemmel">Taqbaylit</option>
+<option value="kk" lang="kk" data-continue="Жалғастыру">Қазақ тілі</option>
+<option value="km" lang="km" data-continue="បន្ត">ភាសាខ្មែរ</option>
+<option value="kn" lang="kn" data-continue="ಮುಂದುವರಿಸು">ಕನ್ನಡ</option>
+<option value="ko_KR" lang="ko" data-continue="계속">한국어</option>
+<option value="ckb" lang="ku" data-continue="به‌رده‌وام به‌">كوردی‎</option>
+<option value="kir" lang="ky" data-continue="Улантуу">Кыргызча</option>
+<option value="lo" lang="lo" data-continue="ຕໍ່​ໄປ">ພາສາລາວ</option>
+<option value="lt_LT" lang="lt" data-continue="Tęsti">Lietuvių kalba</option>
+<option value="lv" lang="lv" data-continue="Turpināt">Latviešu valoda</option>
+<option value="mk_MK" lang="mk" data-continue="Продолжи">Македонски јазик</option>
+<option value="ml_IN" lang="ml" data-continue="തുടരുക">മലയാളം</option>
+<option value="mn" lang="mn" data-continue="Continue">Монгол</option>
+<option value="mr" lang="mr" data-continue="सुरु ठेवा">मराठी</option>
+<option value="ms_MY" lang="ms" data-continue="Teruskan">Bahasa Melayu</option>
+<option value="my_MM" lang="my" data-continue="ဆက်လက်လုပ်ဆောင်ပါ။">ဗမာစာ</option>
+<option value="nb_NO" lang="nb" data-continue="Fortsett">Norsk bokmål</option>
+<option value="ne_NP" lang="ne" data-continue="जारी राख्नुहोस्">नेपाली</option>
+<option value="nl_NL" lang="nl" data-continue="Doorgaan">Nederlands</option>
+<option value="nl_BE" lang="nl" data-continue="Doorgaan">Nederlands (België)</option>
+<option value="nl_NL_formal" lang="nl" data-continue="Doorgaan">Nederlands (Formeel)</option>
+<option value="nn_NO" lang="nn" data-continue="Hald fram">Norsk nynorsk</option>
+<option value="oci" lang="oc" data-continue="Contunhar">Occitan</option>
+<option value="pa_IN" lang="pa" data-continue="ਜਾਰੀ ਰੱਖੋ">ਪੰਜਾਬੀ</option>
+<option value="pl_PL" lang="pl" data-continue="Kontynuuj">Polski</option>
+<option value="ps" lang="ps" data-continue="دوام ورکړه">پښتو</option>
+<option value="pt_PT_ao90" lang="pt" data-continue="Continuar">Português (AO90)</option>
+<option value="pt_AO" lang="pt" data-continue="Continuar">Português de Angola</option>
+<option value="pt_BR" lang="pt" data-continue="Continuar">Português do Brasil</option>
+<option value="pt_PT" lang="pt" data-continue="Continuar">Português</option>
+<option value="rhg" lang="rhg" data-continue="Continue">Ruáinga</option>
+<option value="ro_RO" lang="ro" data-continue="Continuă">Română</option>
+<option value="ru_RU" lang="ru" data-continue="Продолжить">Русский</option>
+<option value="sah" lang="sah" data-continue="Салҕаа">Сахалыы</option>
+<option value="snd" lang="sd" data-continue="اڳتي هلو">سنڌي</option>
+<option value="si_LK" lang="si" data-continue="දිගටම කරගෙන යන්න">සිංහල</option>
+<option value="sk_SK" lang="sk" data-continue="Pokračovať">Slovenčina</option>
+<option value="skr" lang="skr" data-continue="جاری رکھو">سرائیکی</option>
+<option value="sl_SI" lang="sl" data-continue="Nadaljuj">Slovenščina</option>
+<option value="sq" lang="sq" data-continue="Vazhdo">Shqip</option>
+<option value="sr_RS" lang="sr" data-continue="Настави">Српски језик</option>
+<option value="sv_SE" lang="sv" data-continue="Fortsätt">Svenska</option>
+<option value="sw" lang="sw" data-continue="Endelea">Kiswahili</option>
+<option value="szl" lang="szl" data-continue="Kōntynuować">Ślōnskŏ gŏdka</option>
+<option value="ta_IN" lang="ta" data-continue="தொடரவும்">தமிழ்</option>
+<option value="ta_LK" lang="ta" data-continue="தொடர்க">தமிழ்</option>
+<option value="te" lang="te" data-continue="కొనసాగించు">తెలుగు</option>
+<option value="th" lang="th" data-continue="ต่อไป">ไทย</option>
+<option value="tl" lang="tl" data-continue="Magpatuloy">Tagalog</option>
+<option value="tr_TR" lang="tr" data-continue="Devam">Türkçe</option>
+<option value="tt_RU" lang="tt" data-continue="дәвам итү">Татар теле</option>
+<option value="tah" lang="ty" data-continue="Continue">Reo Tahiti</option>
+<option value="ug_CN" lang="ug" data-continue="داۋاملاشتۇرۇش">ئۇيغۇرچە</option>
+<option value="uk" lang="uk" data-continue="Продовжити">Українська</option>
+<option value="ur" lang="ur" data-continue="جاری رکھیں">اردو</option>
+<option value="uz_UZ" lang="uz" data-continue="Davom etish">O‘zbekcha</option>
+<option value="vi" lang="vi" data-continue="Tiếp tục">Tiếng Việt</option>
+<option value="zh_HK" lang="zh" data-continue="繼續">香港中文</option>
+<option value="zh_CN" lang="zh" data-continue="继续">简体中文</option>
+<option value="zh_TW" lang="zh" data-continue="繼續">繁體中文</option>
+</select>
+<p class="step"><span class="spinner"></span><input id="language-continue" type="submit" class="button button-primary button-large" value="Continue" /></p></form><script type="text/javascript">var t = document.getElementById('weblog_title'); if (t){ t.focus(); }</script>
+	<script type='text/javascript' src='http://localhost:8083/wp-includes/js/jquery/jquery.min.js?ver=3.6.4' id='jquery-core-js'></script>
+<script type='text/javascript' src='http://localhost:8083/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.0' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='http://localhost:8083/wp-admin/js/language-chooser.min.js?ver=6.2.2' id='language-chooser-js'></script>
+<script type="text/javascript">
+jQuery( function( $ ) {
+	$( '.hide-if-no-js' ).removeClass( 'hide-if-no-js' );
+} );
+</script>
+</body>
+</html>
+]0;vagrant@dynweb: ~[01;32mvagrant@dynweb[00m:[01;34m~[00m$ ls -lsh project/o[K
+total 28K
+4.0K drwxr-xr-x 8 systemd-coredump root 4.0K Aug  2 12:42 [0m[01;34mdbdata[0m
+4.0K -rw-r--r-- 1 root             root 2.6K Aug  2 12:39 docker-compose.yml
+4.0K drwxr-xr-x 2 root             root 4.0K Aug  2 12:39 [01;34mnginx-conf[0m
+4.0K drwxr-xr-x 2 root             root 4.0K Aug  2 12:39 [01;34mnode[0m
+4.0K drwxr-xr-x 3 root             root 4.0K Aug  2 12:39 [01;34mpython[0m
+4.0K drwxr-xr-x 2 root             root 4.0K Aug  2 12:39 [01;34mscreens[0m
+4.0K drwxr-xr-x 5               82   82 4.0K Aug  2 12:42 [01;34mwordpress[0m
+]0;vagrant@dynweb: ~[01;32mvagrant@dynweb[00m:[01;34m~[00m$ учш[K[K[Kexit
+logout
+[?2004h]0;stas@matebook: ~/Code/otus_labs/lab41_DynWeb[01;32mstas@matebook[00m:[01;34m~/Code/otus_labs/lab41_DynWeb[00m$ exit
+[?2004lexit
+
+Script done on 2023-08-02 15:47:20+03:00 [COMMAND_EXIT_CODE="0"]
