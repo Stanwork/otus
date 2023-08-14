@@ -1,5 +1,6 @@
 ## lab43_MySQL
 ### С помощью Vagrant + Ansible развернут стенд: mysql master + slave
+### Настроена GTID репликация БД
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -310,8 +311,9 @@ end
  ![master:](./screens/master_SHOW_TABLES.jpg)
 
 * На slave: mysql> SHOW SLAVE STATUS\G
-<br>
+
 2 таблицы исключены из репликации:
+
 ```
 Replicate_Ignore_Table: bet.events_on_demand,bet.v_same_event
 ```
