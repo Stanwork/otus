@@ -310,7 +310,8 @@ end
  ![master:](./screens/master_SHOW_TABLES.jpg)
 
 * На slave: mysql> SHOW SLAVE STATUS\G
-Исключены:
+<br>
+2 таблицы исключены из репликации:
 ```
 Replicate_Ignore_Table: bet.events_on_demand,bet.v_same_event
 ```
