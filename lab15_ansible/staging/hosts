@@ -1,2 +1,2 @@
 [web]
-nginx ansible_host=127.0.0.1 ansible_port=2222 ansible_private_key_file=.vagrant/machines/nginxvm/virtualbox/private_key
+dynweb ansible_host=127.0.0.1 ansible_port=2222 ansible_private_key_file=.vagrant/machines/dynweb/virtualbox/private_key

@@ -1,4 +1,4 @@
-ENV['VAGRANT_SERVER_URL'] = 'https://vagrant.elab.pro'
+ENV['VAGRANT_SERVER_URL'] = 'http://vagrant.elab.pro'
 # Описываем Виртуальные машины
 MACHINES = {
   # Указываем имя ВМ "kernel update"

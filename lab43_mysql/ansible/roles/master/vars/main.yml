@@ -1,0 +1,4 @@
+---
+mysql_root_password: "!OtusLinux2023"
+replication_user: "repl"
+replication_password: "!OtusLinuxReplica2023"
